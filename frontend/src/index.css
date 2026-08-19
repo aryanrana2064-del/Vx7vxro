@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #f4f6fb;
+}
+
+h1, h2, h3, .font-display, .font-brand { font-family: "Cinzel", "Space Grotesk", serif; letter-spacing: 0.005em; }
+.font-num { font-family: "Space Grotesk", "Manrope", sans-serif; letter-spacing: -0.02em; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes riseIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes pulseGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.35);} 50% { box-shadow: 0 0 0 8px rgba(59,130,246,0);} }
+@keyframes shimmer { 0% { background-position: -200% 0;} 100% { background-position: 200% 0;} }
+
+.rise { animation: riseIn .35s cubic-bezier(.22,.61,.36,1) both; }
+.rise-1 { animation-delay: .04s; } .rise-2 { animation-delay: .09s; } .rise-3 { animation-delay: .14s; }
+.rise-4 { animation-delay: .19s; } .rise-5 { animation-delay: .24s; }
+
+@layer components {
+    .inp {
+        @apply w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm bg-white outline-none transition-colors focus:border-[#d4a437] focus:ring-2 focus:ring-[#d4a437]/20;
+    }
+    .card {
+        @apply bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_2px_rgba(16,24,39,0.04),0_8px_24px_-16px_rgba(16,24,39,0.10)];
+    }
+    .card-hover {
+        @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_1px_2px_rgba(16,24,39,0.04),0_16px_40px_-16px_rgba(16,24,39,0.18)];
+    }
+    .th {
+        @apply bg-slate-50/80 text-[11px] uppercase tracking-wide text-slate-500;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center gap-2 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm bg-white hover:bg-slate-50 active:scale-[0.98] transition-all;
+    }
+    .btn-dark {
+        @apply inline-flex items-center gap-2 bg-[#101827] text-white rounded-xl px-4 py-2.5 text-sm font-medium hover:bg-[#1c2740] active:scale-[0.98] transition-all;
+    }
+    .btn-gold {
+        @apply inline-flex items-center gap-2 bg-[#d4a437] text-[#101827] rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-[#c1932c] active:scale-[0.98] transition-all shadow-lg shadow-[#d4a437]/20;
+    }
+    .btn-primary {
+        @apply inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-all active:scale-[0.98] shadow-lg shadow-blue-500/25;
+        background-image: linear-gradient(135deg, #2563eb 0%, #3b82f6 55%, #38bdf8 100%);
+    }
+    .btn-primary:hover { filter: brightness(1.05); }
+    .stat-pill {
+        @apply inline-flex items-center justify-center w-10 h-10 rounded-xl;
+    }
+    .kpi-value {
+        @apply mt-3 font-display text-2xl font-bold tabular-nums tracking-tight text-slate-900;
+    }
+    .icon-btn {
+        @apply inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors;
+    }
+    .modal-bg {
+        @apply fixed inset-0 bg-[#101827]/60 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-3 overflow-auto;
+    }
+    .modal {
+        @apply bg-white rounded-2xl w-full p-5 sm:p-6 my-6 shadow-2xl;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+.kpi-value, .tabular-nums { font-family: "Space Grotesk", "Manrope", sans-serif !important; letter-spacing: -0.01em; }
+
+::selection {
+    background: #d4a437;
+    color: #101827;
+}
+
+*::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+@media print {
+    aside,
+    header {
+        display: none !important;
+    }
+}
+
+/* ------------------------------------------------------------ Dark mode (iOS glass) */
+html.dark { color-scheme: dark; }
+html.dark body { background: #0b1120; color: #e5e7eb; }
+html.dark .card {
+    background: rgba(23, 31, 49, 0.72);
+    border-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 8px 34px -14px rgba(0, 0, 0, 0.7);
+}
+html.dark .inp {
+    background: rgba(15, 23, 42, 0.7);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #e5e7eb;
+}
+html.dark .inp::placeholder { color: #64748b; }
+html.dark .th { background: rgba(255, 255, 255, 0.03); color: #94a3b8; }
+html.dark .modal { background: rgba(17, 24, 39, 0.96); color: #e5e7eb; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+html.dark .btn-ghost { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.12); color: #e5e7eb; }
+html.dark .btn-dark { background: rgba(255,255,255,0.08); }
+
+/* utility remaps so every screen adapts */
+html.dark .bg-white,
+html.dark .bg-white\/95,
+html.dark .bg-white\/85 { background-color: rgba(23, 31, 49, 0.72) !important; backdrop-filter: blur(14px); }
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/80,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-100 { background-color: rgba(255, 255, 255, 0.04) !important; }
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700 { color: #e5e7eb !important; }
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-slate-400 { color: #94a3b8 !important; }
+html.dark .border,
+html.dark .border-t,
+html.dark .border-b,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/70,
+html.dark .border-slate-300 { border-color: rgba(255, 255, 255, 0.10) !important; }
+html.dark .divide-y > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255, 255, 255, 0.08) !important; }
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-50\/70:hover { background-color: rgba(255, 255, 255, 0.06) !important; }
+html.dark table tbody tr { border-color: rgba(255,255,255,0.08); }
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}

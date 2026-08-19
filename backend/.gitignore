@@ -1,0 +1,14 @@
+# Local SQLite database (created at runtime; must NOT ship with the app)
+vyro.db
+vyro.db-shm
+vyro.db-wal
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+build/
+*.spec

@@ -1,0 +1,28 @@
+# Render.com deployment — Docker web service with a persistent disk for the SQLite file.
+# Note: persistent disks require a paid instance type (starter or higher) and pin the
+# service to a single instance (perfect for a single-file SQLite database).
+services:
+  - type: web
+    name: vyro-vx7
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /api/
+    autoDeploy: true
+    envVars:
+      - key: VYRO_DB_PATH
+        value: /data/vyro.db
+      - key: VYRO_FRONTEND_DIR
+        value: /app/frontend_build
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@vyrovx7.app
+      - key: ADMIN_PASSWORD
+        sync: false            # set your admin password in the Render dashboard
+    disk:
+      name: vyro-data
+      mountPath: /data          # SQLite vyro.db persists here across deploys/restarts
+      sizeGB: 1

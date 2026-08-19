@@ -1,0 +1,36 @@
+{
+  "name": "vyro-vx7-desktop",
+  "version": "1.0.0",
+  "description": "VYRO VX7 — Smart Business POS (Windows desktop, offline-capable)",
+  "author": "VYRO VX7",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64",
+    "dist:portable": "electron-builder --win portable --x64"
+  },
+  "build": {
+    "appId": "com.vyro.vx7",
+    "productName": "VYRO VX7 POS",
+    "directories": { "output": "dist", "buildResources": "resources" },
+    "files": ["main.js", "preload.js", "app/**/*", "backend/**/*"],
+    "extraResources": [{ "from": "backend", "to": "backend" }],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "VYRO VX7 POS"
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}
