@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build --workspace @vxqor/web",
+  "installCommand": "npm install --no-audit --no-fund",
+  "outputDirectory": "apps/web/dist",
+  "rewrites": [{ "source": "/((?!assets|brand|v1).*)", "destination": "/index.html" }]
+}

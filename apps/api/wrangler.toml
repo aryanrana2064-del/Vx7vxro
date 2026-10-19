@@ -1,0 +1,28 @@
+# Distinct name on purpose: deploying must NOT replace the existing
+# token-gated vxqor-api Worker that currently serves the production registry.
+name = "vxqor-api-v2"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Monitoring scheduler. Workers Free allows 3 cron triggers per Worker with a
+# 1-minute minimum interval; the default cadence is every 5 minutes and the
+# number of checks per run is capped by VXQOR_MAX_CHECKS_PER_RUN (subrequest limit).
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+# Existing production database — do not create another one.
+# Fill database_id from `npx wrangler d1 list` (same id as the deployed Worker).
+database_name = "vxqor-db"
+database_id = "local-dev-placeholder"
+migrations_dir = "migrations"
+
+[vars]
+VXQOR_WEB_ORIGIN = "http://localhost:5173"
+VXQOR_PBKDF2_ITERATIONS = "210000"
+VXQOR_MAX_CHECKS_PER_RUN = "15"
+# Deployed VXQOR Worker that owns the production vxqor-db website registry.
+# The token (VXQOR_REMOTE_API_TOKEN) is a Worker secret / server env var only.
+VXQOR_REMOTE_API_URL = "https://vxqor-api.aryanrana2064.workers.dev"

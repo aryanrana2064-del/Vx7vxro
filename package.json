@@ -1,0 +1,29 @@
+{
+  "name": "vxqor",
+  "private": true,
+  "version": "0.1.0",
+  "description": "VXQOR - website intelligence, monitoring, analytics and security platform",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run dev -w @vxqor/api",
+    "dev:api:node": "npm run dev:node -w @vxqor/api",
+    "dev:web": "npm run dev -w @vxqor/web",
+    "build": "npm run build -w @vxqor/web && npm run typecheck -w @vxqor/api",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "npm run typecheck -w @vxqor/shared && npm run typecheck -w @vxqor/api && npm run typecheck -w @vxqor/web",
+    "db:migrate:local": "npm run db:migrate:local -w @vxqor/api",
+    "db:migrate:remote": "npm run db:migrate:remote -w @vxqor/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "vitest": "^2.1.9"
+  }
+}

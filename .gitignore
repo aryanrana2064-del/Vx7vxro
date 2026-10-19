@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.wrangler/
+.dev/
+.vite/
+.vercel/
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+npm-debug.log*
+*.zip
